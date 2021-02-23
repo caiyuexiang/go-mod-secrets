@@ -1,5 +1,6 @@
 /********************************************************************************
  * Copyright 2019 Dell Inc.
+ * Copyright 2021 Intel Corp.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -22,8 +23,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/edgexfoundry/go-mod-secrets/pkg"
-	"github.com/edgexfoundry/go-mod-secrets/secrets"
+	"github.com/edgexfoundry/go-mod-secrets/v2/pkg"
+	"github.com/edgexfoundry/go-mod-secrets/v2/pkg/types"
+	"github.com/edgexfoundry/go-mod-secrets/v2/secrets"
 )
 
 var Secrets = map[string]string{
@@ -82,6 +84,10 @@ func (mssm MockSecretClient) StoreSecrets(path string, secrets map[string]string
 		ss[key] = value
 	}
 	return nil
+}
+
+func (mssm MockSecretClient) GetTokenDetails() (*types.TokenMetadata, error) {
+	return nil, nil
 }
 
 func TestGetKeys(t *testing.T) {
